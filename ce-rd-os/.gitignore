@@ -1,0 +1,50 @@
+# Build outputs
+dist/*.zip
+dist/*.tar.gz
+dist/*.sha256
+
+# Local agent state
+.claude/local/
+.codex/local/
+.cursor/local/
+.aider.local/
+*.local
+*.local.*
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Editor cruft
+.vscode/settings.local.json
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.tox/
+
+# Node (if any tooling needs it)
+node_modules/
+
+# Logs
+*.log
+
+# Secrets and overrides (these must NEVER be committed)
+.env
+.env.*
+.privacy-allowlist.md
+AGENTS.override.md
+**/secrets/
+
+# Keep .gitkeep files in otherwise-empty dirs
+!.gitkeep
+
+# Handoff packets are agent-to-agent communication, never committed
+HANDOFF_PACKET*.md

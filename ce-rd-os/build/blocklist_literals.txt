@@ -1,0 +1,84 @@
+# build/blocklist_literals.txt
+#
+# Literal terms verify_self.sh scans for. One term per line.
+# Lines starting with `#` are comments. Blank lines are ignored.
+#
+# This file is the operational source of truth for the privacy gate.
+# build/PRIVACY_BLOCKLIST.md is the canonical documentation; this file
+# is its machine-readable distillate.
+#
+# Add a term here whenever you add one to PRIVACY_BLOCKLIST.md.
+
+# Section A: personal identifiers
+Austin B. Green
+Austin Green
+sage_architect
+
+# Section B: internal project codenames
+HumanX
+HumanX_Master_Capture
+FateX
+FateX_xDx
+SageX
+0sXai
+WikiLLM
+OpenBrain
+Open Brain
+Wiki_Log
+Wiki Log
+WIKI_LLM
+zero_trust_zero
+ztz3
+3ztz
+SFF_2026
+SFF 2026
+
+# Section B (renamed-internal terms)
+PEL_GATE
+PEL gate
+PEL approval
+pathos_ethos_logos
+143_protocol
+143 protocol
+
+# Section C: contracting-restricted terminology
+Mercor
+mercor
+Pavilion
+pavilion
+Emporium
+emporium
+criterion tags
+contextual_benchmarking
+trade_off_tag
+durability_tag
+lab_test_tag
+spec_baseline_tag
+user_sentiment_tag
+hallucination_check
+antihack
+spec_baseline
+
+# Section D: bare model identifiers (forbidden as standalone identifier)
+# These have an exception: literal use in mapping tables (registry.yaml,
+# references/agentic_models.md) is allowed. Section D enforcement uses
+# word-boundary matching plus path exclusion.
+sonnet_ok
+
+# Section E: unsupported promotional claims
+# These need a citation; flagged where they appear without one.
+# Word-boundary matching.
+state of the art
+best in class
+groundbreaking
+revolutionary
+first of its kind
+
+# Section G: personal path leaks
+/Users/
+/home/austin
+C:\\Users\\
+
+# End of literal list. Section F (credential regex) and Section D
+# (model-name word-boundary checks) are handled separately in
+# verify_self.sh.

@@ -1,0 +1,44 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x scripts/*.sh
+
+      - name: Run verify_self.sh
+        run: bash scripts/verify_self.sh
+
+      - name: Pack text bundle
+        run: bash scripts/pack_text_bundle.sh
+
+      - name: Generate SHA-256 sidecar
+        run: |
+          cd dist
+          for f in *.zip; do
+            sha256sum "$f" > "$f.sha256"
+          done
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          gh release create "$TAG" \
+            dist/ce-rd-os-v0.1.0-text-bundle.zip \
+            dist/ce-rd-os-v0.1.0-text-bundle.zip.sha256 \
+            --title "CE_RD_OS $TAG" \
+            --notes-file CHANGELOG.md \
+            --verify-tag

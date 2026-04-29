@@ -1,0 +1,152 @@
+# registry.yaml
+# Skill registry for CE_RD_OS v0.1.0
+# Schema mirrors openai-cookbook and anthropics/claude-cookbooks conventions.
+
+version: 0.1.0
+spec: agentskills.io
+agents_md_spec: agents.md (Linux Foundation Agentic AI Foundation)
+
+skills:
+  - name: system-directive
+    path: skills/system_directive/SKILL.md
+    description: >
+      Identity, source hierarchy, 100-percent confidence loop, Trinity rubric
+      reference, output contract.
+    license: Apache-2.0
+    compatibility:
+      - claude-code
+      - codex-cli
+      - cursor
+      - aider
+      - continue-dev
+      - notebooklm
+      - claude-project
+      - custom-gem
+      - custom-gpt
+    sub_agent_default:
+      model_type: claude_sonnet_4_6
+      effort: medium
+      loop_bound: { type: count, count: 20 }
+
+  - name: setup-intake
+    path: skills/setup_intake/SKILL.md
+    description: >
+      Captures the irreducible setup parameters before any work begins:
+      mission, role, sources, rubric mode, sub_agent profile, memory option,
+      ML backend option, loop bound.
+    license: Apache-2.0
+    compatibility:
+      - claude-code
+      - codex-cli
+      - cursor
+      - aider
+      - continue-dev
+      - notebooklm
+      - claude-project
+      - custom-gem
+      - custom-gpt
+    sub_agent_default:
+      model_type: claude_sonnet_4_6
+      effort: medium
+      loop_bound: { type: until_answer, until_answer: true }
+
+  - name: source-ingestion
+    path: skills/source_ingestion/SKILL.md
+    description: >
+      Detect, normalize, interrogate, score, and route incoming sources.
+      Quarantines anything that cannot be conformed to the active rubric.
+    license: Apache-2.0
+    compatibility:
+      - claude-code
+      - codex-cli
+      - cursor
+      - aider
+      - continue-dev
+      - notebooklm
+      - claude-project
+      - custom-gem
+      - custom-gpt
+    sub_agent_default:
+      model_type: claude_sonnet_4_6
+      effort: medium
+      loop_bound: { type: count, count: 30 }
+
+  - name: trinity-rubric
+    path: skills/trinity_rubric/SKILL.md
+    description: >
+      9-cell Pathos / Ethos / Logos rubric grounded in arXiv:2507.17746.
+      Default mode boolean-atomic. Optional ML backend hook for GEPA via
+      MLflow or OpenEvolve.
+    license: Apache-2.0
+    compatibility:
+      - claude-code
+      - codex-cli
+      - cursor
+      - aider
+      - continue-dev
+      - notebooklm
+      - claude-project
+      - custom-gem
+      - custom-gpt
+    sub_agent_default:
+      model_type: claude_sonnet_4_6
+      effort: medium
+      loop_bound: { type: count, count: 20 }
+
+  - name: workstream-creator
+    path: skills/workstream_creator/SKILL.md
+    description: >
+      Meta-skill. Generates a workstream MD that the user fills with their
+      research bundle, then routes the bundle through the other skills.
+    license: Apache-2.0
+    compatibility:
+      - claude-code
+      - codex-cli
+      - cursor
+      - aider
+      - continue-dev
+      - notebooklm
+      - claude-project
+      - custom-gem
+      - custom-gpt
+    sub_agent_default:
+      model_type: claude_sonnet_4_6
+      effort: medium
+      loop_bound: { type: count, count: 20 }
+
+  - name: publish-bundle
+    path: skills/publish_bundle/SKILL.md
+    description: >
+      Agentskills.io conformant packing, AGENTS.md generation, dual-track
+      output (GitHub repo plus 10-file text zip).
+    license: Apache-2.0
+    compatibility:
+      - claude-code
+      - codex-cli
+      - cursor
+      - aider
+      - continue-dev
+    sub_agent_default:
+      model_type: claude_sonnet_4_6
+      effort: medium
+      loop_bound: { type: count, count: 20 }
+
+# References folder index. Resolved at runtime by skills as needed.
+references:
+  - path: references/rar_paper_summary.md
+  - path: references/gepa_integration.md
+  - path: references/memory_options.md
+  - path: references/ml_backend_options.md
+  - path: references/agentic_models.md
+  - path: references/socratic_question_bank.md
+  - path: references/packet_shapes.md
+  - path: references/quarantine_procedure.md
+  - path: references/notebooklm_migration.md
+  - path: references/open_research.md
+
+# Build artifacts under build/ are NOT included in the text bundle.
+# They are repo-only.
+build_artifacts:
+  - path: build/PRIVACY_BLOCKLIST.md
+  - path: build/APPROVAL_GATE_TEMPLATE.md
+  - path: build/BUILD_SEQUENCE.md

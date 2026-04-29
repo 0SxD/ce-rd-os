@@ -1,0 +1,23 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify-self:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x scripts/*.sh
+
+      - name: Run verify_self.sh
+        run: bash scripts/verify_self.sh
+
+      - name: Validate skill frontmatter
+        run: make validate-skills

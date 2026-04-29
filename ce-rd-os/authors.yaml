@@ -1,0 +1,19 @@
+# authors.yaml
+# Author entries for CE_RD_OS v0.1.0.
+# Anonymous-with-handle posture per Q1 lock.
+
+authors:
+  - handle: "0SxD"
+    role: architect
+    contact: "https://github.com/0SxD"
+    orcid: null
+    affiliation: null
+    note: >
+      Project author and architect. Real-name attribution may be added by
+      the author at any point post-publication via a CHANGELOG entry and
+      a PR updating this file. For v0.1.0 ship, handle-only attribution
+      is the explicit design choice.
+
+# Contributors list grows from this seed via PRs. CONTRIBUTING.md describes
+# the contributor agreement (Apache-2.0 grant).
+contributors: []
