@@ -1,45 +1,35 @@
-# CE_RD_OS
+# ce-rd-os
 
-Compound Engineer R&D Operating System.
-First branch of an evolving compound-engineered R&D system.
-
-A setup-first, host-agnostic, model-agnostic scaffold for compound-engineered
-research and development. Conformant to the AGENTS.md spec (Linux Foundation
-Agentic AI Foundation) and the Agent Skills spec (Anthropic, agentskills.io).
+Compound Engineer R&D Operating System: a host-agnostic, model-agnostic scaffold of six composable skills for structured research and agent development.
 
 ## Status
 
-v0.1.0. First public ship. Self-verifying, human-gated. Apache-2.0 for code,
-CC-BY-4.0 for documentation. See `LICENSE` and `LICENSE-DOCS`.
+Experimental. Maintained by Sage / 0SxD as part of an ongoing research portfolio focused on prompt engineering, agent skills, and LLM evaluation.
 
-## What it does
+## What this is
 
-CE_RD_OS provides six composable skills that any AGENTS.md-aware coding
-agent or any text-bundle host (NotebookLM, custom Gem, custom GPT, Claude
-project) can run as a research and development scaffold.
+CE_RD_OS is a six-skill scaffold that any AGENTS.md-aware coding agent or text-bundle host (NotebookLM, custom Gem, custom GPT, Claude project) can load as a structured R&D operating system. The skills enforce a strict intake-evaluate-publish loop grounded in formal rubric methodology. The intent is to study how structured prompt contracts affect agent output quality across different model families and hosting environments.
 
-The six skills:
+## Approach
 
-1. **system_directive**: identity, source hierarchy, 100 percent confidence
-   loop, Trinity rubric reference, output contract.
-2. **setup_intake**: captures the irreducible parameters (mission, role,
-   sources, rubric mode, sub-agent profile, memory option, ML backend
-   option, loop bound) before any work begins.
-3. **source_ingestion**: detect, normalize, interrogate, score, route
-   incoming sources. Quarantines anything that cannot be conformed.
-4. **trinity_rubric**: 9-cell evaluation grid (Pathos, Ethos, Logos by
-   Coverage, Self-contained, Importance) grounded in arXiv:2507.17746
-   (Rubrics as Rewards). Default mode is boolean-atomic. Optional
-   ML backend hook for arXiv:2507.19457 (GEPA via MLflow) or OpenEvolve.
-5. **workstream_creator**: meta-skill. Generates the workstream MD that
-   the user fills with their research bundle, then routes to the other
-   skills.
-6. **publish_bundle**: agentskills.io conformant packing, AGENTS.md
-   generation, dual-track output (GitHub repo plus 10-file text zip).
+- Six composable skills with defined dependency order (system_directive -> setup_intake -> source_ingestion -> trinity_rubric -> workstream_creator -> publish_bundle)
+- Boolean-atomic evaluation by default; optional ML backend hook (MLflow, OpenEvolve) for continuous rubric refinement
+- Conforms to the AGENTS.md spec (Linux Foundation Agentic AI Foundation) and the Agent Skills spec (Anthropic / agentskills.io)
+- Dual delivery: GitHub repo (Track A1) and a 10-file text zip for text-only hosts (Track A2)
+- Self-verifying: `scripts/verify_self.sh` gates every push
 
-## How to use
+## Layout
 
-### Track A1, GitHub repo (Claude Code, Codex, Cursor, Aider, Continue.dev)
+- `skills/` - six SKILL.md files, one per composable skill
+- `packets/` - pre-built context packets for each track
+- `references/` - upstream lineage and architectural references
+- `scripts/` - verify_self.sh, pack_text_bundle.sh, and support scripts
+- `build/` - build-time artifacts including PRIVACY_BLOCKLIST.md (not shipped in Track A)
+- `examples/` - example CLAUDE.md and agent boot sequence
+
+## Usage / How to read this
+
+Clone and verify:
 
 ```
 git clone https://github.com/0SxD/ce-rd-os.git
@@ -47,65 +37,29 @@ cd ce-rd-os
 bash scripts/verify_self.sh
 ```
 
-Open the repo in your AI coding environment. The agent reads `AGENTS.md`
-on its own and proceeds through the skills in dependency order.
-
-### Track A2, text bundle (NotebookLM, Claude project, custom Gem, custom GPT)
+To produce the text bundle for a text-only host:
 
 ```
-cd ce-rd-os
 bash scripts/pack_text_bundle.sh
 ```
 
-Output: `dist/ce-rd-os-v0.1.0-text-bundle.zip`. Drag and drop into your
-host. Then paste the prompt from `packets/PROCEED.md` to start the
-multi-turn setup.
+Output: `dist/ce-rd-os-v0.1.0-text-bundle.zip`. Drop into NotebookLM, a Claude project, or a custom GPT. Then paste the prompt from `packets/PROCEED.md` to begin the multi-turn setup.
 
-## Quick start
+## Prior art and citations
 
-Two commands cover the common case:
-
-```
-bash scripts/verify_self.sh
-bash scripts/pack_text_bundle.sh
-```
-
-The first verifies the repo is publish-ready. The second produces the
-drop-in zip for any text-only host.
-
-## Citations
-
-This bundle composes (does not copy) from the following Tier-1 sources:
-
-- agents.md, Linux Foundation Agentic AI Foundation, AGENTS.md spec.
-- agentskills.io, Anthropic, Agent Skills spec, Apache-2.0 / CC-BY-4.0.
-- arXiv:2507.17746, Rubrics as Rewards (RaR), MIT-affiliated authors.
-- arXiv:2507.19457, GEPA, plus github.com/gepa-ai/gepa under Apache-2.0.
-- arXiv:2510.07743, OpenRubrics.
-- github.com/EveryInc/compound-engineering-plugin, MIT, plan-work-review-compound
-  pattern, attribution-only.
-- github.com/letta-ai/letta, Apache-2.0, agent runtime architectural reference.
-- github.com/mem0ai/mem0, Apache-2.0, memory layer reference.
-
-Full upstream lineage in `NOTICES.md`.
+- Rubrics as Rewards (RaR), arXiv:2507.17746 - grounds the `trinity_rubric` skill's boolean-atomic scoring grid
+- OpenRubrics, arXiv:2510.07743 - rubric construction methodology reference
+- Adaptive Precise Boolean Rubrics (Google), arXiv:2503.23339 - boolean decomposition pattern
+- Checklists Are Better Than Reward Models (CMU/Apple), arXiv:2507.18624 - motivates the checklist-first evaluation contract
+- Anthropic Skills spec / agentskills.io - governs SKILL.md frontmatter format
+- AGENTS.md spec (Linux Foundation Agentic AI Foundation) - governs AGENTS.md at repo root
 
 ## License
 
-Code: Apache-2.0. Documentation: CC-BY-4.0. Copyright 2026 0SxD.
+Code: Apache-2.0. Documentation: CC-BY-4.0. Dual-licensed.
+Apache-2.0 governs code and shell scripts. CC-BY-4.0 governs documentation, SKILL.md bodies, and references. See `LICENSE` and `LICENSE-DOCS` for full text.
+Author: Sage / 0SxD
 
-This repo is dual-licensed. Apache-2.0 governs code and shell scripts;
-CC-BY-4.0 governs documentation, SKILL.md bodies, and references. See
-`LICENSE` and `LICENSE-DOCS` for full text.
+## Notes
 
-## Contributing
-
-See `CONTRIBUTING.md`. Pull requests and issues welcome. The repo runs
-`scripts/verify_self.sh` on every push and PR; the gate must pass before
-merge.
-
-## Versioning
-
-SemVer 2.0.0 plus Conventional Commits. Annotated tags. Release notes via
-`gh release create`. See `CHANGELOG.md`.
-
-End README.
+This repo is part of an active R&D portfolio. Content may move, change, or be withdrawn. Issues and PRs welcome but reviews are best-effort.
