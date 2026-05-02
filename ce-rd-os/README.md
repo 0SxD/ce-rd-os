@@ -54,6 +54,8 @@ Output: `dist/ce-rd-os-v0.1.0-text-bundle.zip`. Drop into NotebookLM, a Claude p
 - Anthropic Skills spec / agentskills.io - governs SKILL.md frontmatter format
 - AGENTS.md spec (Linux Foundation Agentic AI Foundation) - governs AGENTS.md at repo root
 
+See also: [research-audit-loop-skills-v01](https://github.com/0SxD/research-audit-loop-skills-v01) for the audit-skill bundle that pairs with the trinity_rubric skill.
+
 ## License
 
 Code: Apache-2.0. Documentation: CC-BY-4.0. Dual-licensed.
